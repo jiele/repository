@@ -1,0 +1,87 @@
+1. git add
+	添加文件到git:
+		git add fileName.txt
+2. git commit
+	提交文件到git:
+		git commit -m "提交仓库的描述信息"
+3. git status
+	查看仓库状态
+4. git diff
+	查看上次修改后未提交的情况
+5. git log
+	查看历史修改记录
+	git log --pretty=oneline: 让每次修改的情况在一行内展示
+	git log --graph --pretty=oneline --abbrev-commit：可以查看所有子分支的更新日志
+6. git reset --hard 版本号
+	版本回退，也可以用于恢复被删除的文件
+7. git checkout -- 文件名
+	撤销修改(不仅仅可以撤销当前的修改，还可以恢复被删除的文件)
+	其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
+8. git rm 文件名
+	从git版本库删除文件，每次删除后，需要使用 git commit 命令提交
+9. ssh-keygen -t rsa -C "youremail@example.com"
+	创建 SSH Key 用于连接远程仓库(GitHub)
+	(youremail@example.com 是自己注册GitHub的邮箱)
+	命令执行完成之后，在用户主目录会生成id_rsa(私钥)、id_rsa.pub(公钥)文件
+	本地仓库关联远程仓库前，id_rsa.pub公钥需要添加到GitHub的SSH Key
+10. git remote add origin yourgithubUrl
+	本地仓库管理远程仓库，需要将目录跳转到本地仓库目录之后执行
+	yourgithubUrl：你的GitHub关联地址，例：
+		git@github.com:sz-eason/repository
+11. git push -u origin master
+	把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令
+12. git clone yourgithubUrl
+	clone远程仓库到本地仓库
+13. git checkout -b dev
+	创建并切换分支(分支名称：dev)
+	13-1. git branch dev
+		创建分支(dev)
+	13-2. git checkout dev
+		切换分支(dev)
+14. git branch
+	查看当前分支
+15. git merge dev  /  git merge --no-ff -m "使用--no-ff方式合并分支，保留分支信息" dev
+	将dev分支上的内容合并到master(默认使用fastforward模式，删除分支后，git会丢失分支信息，可以通过参数:--no-ff来禁用fastforward)
+16. git branch -d dev
+	删除dev分支(如果是删除未合并的分支，-D需要大写)
+17. git stash
+	把当前的工作现场存储下来，等以后恢复(存储过后，当前分支的工作区清空，恢复之后还原)
+18. git stash list 
+	查看存储下来的工作现场
+19. git stash apply stash@{0}
+	恢复之前保存下来的的工作现场(stash@{0}: 现场名称，可在现场列表中查看)
+20. git stash drop
+	删除之前保存下来的工作现场
+21. git stash pop
+	恢复之前保存下来的工作现场并删除
+22. git remote
+	查看远程仓库信息
+23. git remote -v
+	查看远程仓库的详细信息(可查看抓取和推送的origin的地址。如果没有推送权限，就看不到push的地址。)
+24. git push 远程仓库名称 本地分支名称
+	把本地的分支推送到指定的远程仓库，
+	例：
+		将本地master推送到origin远程仓库：git push origin master
+		将本地dev推送到origin远程仓库：	  git push origin master
+25. git pull 远程仓库名 远程分支名
+	将远程仓库的文件拉取到本地仓库
+26. git checkout -b dev origin/dev
+	创建本地分支dev，并且关联远程仓库origin下的dev分支
+27. git branch --set-upstream-to=origin/dev dev
+	指定本地dev分支与远程origin/dev分支的链接，根据提示，设置dev和origin/dev的链接：
+28. git tag 标签号 
+	给git仓库当前提交完成代码打一个标签号，例：git tag v1.0
+29. git tag
+	查看所有的标签版本
+30. git tag 标签号  git版本号(可以通过git log查看每次提交的版本号)
+	给以前提交的代码打标签号，例：git tag v2.0 f52c633......
+31. git show <标签号>
+	查看标签信息，例如：git show v1.0
+32. git tag -a 标签号 -m "说明信息" git版本号(可以通过git log查看每次提交的版本号)
+	创建带有说明的标签，-a 指定标签名， -m 指定说明文字
+33. git tag -d v1.0
+	删除指定标签
+34. git push origin 标签名
+	将指定标签推送到远程仓库
+35. git push origin --tags
+	将所有标签推送到远程仓库
